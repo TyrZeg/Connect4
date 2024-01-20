@@ -1,15 +1,25 @@
 
-
-
-
 import javax.swing.*;
-class GUI{
-    public static void main(String args[]){
-       JFrame frame = new JFrame("My First GUI");
-       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       frame.setSize(300,300);
-       JButton button = new JButton("Press");
-       frame.getContentPane().add(button); // Adds Button to content pane of frame
-       frame.setVisible(true);
+import java.awt.*;
+
+
+class GUI extends JFrame{
+
+
+    GUI(){
+
+        JPanel content = (JPanel) getContentPane();
+        ImageIcon backgroundImage = new ImageIcon(getClass().getResource("Java UI.jpg"));
+        JLabel label = new JLabel(backgroundImage);
+        content.add(label, BorderLayout.CENTER);
+
+        setContentPane(content);
+
+        pack();
+
+        setLocationRelativeTo(null);
+        setVisible(true);
+
     }
+
 }
