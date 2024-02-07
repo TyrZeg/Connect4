@@ -1,9 +1,7 @@
 package main;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.*;
 
@@ -12,11 +10,11 @@ class GUI extends JFrame {
     int whichOne;
     int araWhichOne;
     GUI() {
+        super("Connect 4");
+        //Settings settings = new Settings(false);
+        setLayout(new BorderLayout());
         ArabicMenu arabicMenu = new ArabicMenu();
         Game gameMenu = new Game();
-        setVisible(true);
-        pack();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         EnglishMenu menu = new EnglishMenu();
         add(menu);
         
@@ -25,14 +23,24 @@ class GUI extends JFrame {
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         do{
+
             whichOne = menu.getWhichOne();
             araWhichOne = arabicMenu.getWhichOne();
 
-            if(whichOne == 2){
+            if(araWhichOne == 1){
+                arabicMenu.setWhichOne(0);
+                arabicMenu.setVisible(false);
+                menu.setVisible(true);
+            }else if(whichOne == 2){
                 menu.setWhichOne(0);
                 add(arabicMenu);
                 menu.setVisible(false);
                 arabicMenu.setVisible(true);
+                //
+                //settings = new Settings(false);
+                //add(settings, BorderLayout.CENTER);
+                //settings.setVisible(true);
+                
             }else if(whichOne == 3 || araWhichOne == 3){
                 arabicMenu.setWhichOne(0);
                 menu.setWhichOne(0);
@@ -40,10 +48,6 @@ class GUI extends JFrame {
                 menu.setVisible(false);
                 arabicMenu.setVisible(false);
                 gameMenu.setVisible(true);
-            }else if(araWhichOne == 1){
-                arabicMenu.setWhichOne(0);
-                arabicMenu.setVisible(false);
-                menu.setVisible(true);
             }
             try {
                 Thread.sleep(500);

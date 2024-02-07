@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class Game extends JPanel{
     
     Game(){
-      ImageIcon icon = new ImageIcon("C:\\Users\\boobe\\Code\\Java\\Connect4\\Connect4\\src\\main\\JavaMainUI.jpg");
+      ImageIcon icon = new ImageIcon(getClass().getResource("JavaGameBackround.jpg"));
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Image image = icon.getImage().getScaledInstance(screenSize.width, screenSize.height, Image.SCALE_SMOOTH);
 

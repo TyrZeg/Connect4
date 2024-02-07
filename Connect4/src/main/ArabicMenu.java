@@ -11,36 +11,20 @@ import java.awt.event.ActionListener;
 
 public class ArabicMenu extends JPanel{
     int whichOne;
-    boolean arabicCreated;
     ArabicMenu(){
-        /* 
-    ImageIcon icon = new ImageIcon("C:\\Users\\boobe\\Code\\Java\\Connect4\\Connect4\\src\\main\\JavaArabicUI.jpg");
-        JPanel arabicMenu = new JPanel(new BorderLayout()) {
+    //ImageIcon icon = new ImageIcon(getClass().getResource("JavaArabicUI.jpg"));
+    //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    //Image image = icon.getImage().getScaledInstance(screenSize.width, screenSize.height, Image.SCALE_SMOOTH);
+    ImageIcon img = new ImageIcon(getClass().getResource("JavaArabicUI.jpg"));
+    JPanel menu = new JPanel()
+    {
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(Graphics g)
+        {
             super.paintComponent(g);
-            if (icon != null) {
-                g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
-            }
+            g.drawImage(img.getImage(), 1920, 1080, null);
         }
         };
-        */
-    ImageIcon icon = new ImageIcon("C:\\Users\\boobe\\Code\\Java\\Connect4\\Connect4\\src\\main\\JavaArabicUI.jpg");
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    Image image = icon.getImage().getScaledInstance(screenSize.width, screenSize.height, Image.SCALE_SMOOTH);
-
-        /*{
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                if (icon != null) {
-                    g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
-                    }
-            }
-        };
-        setContentPane(menu);
-        */
-        JLabel menu = new JLabel(new ImageIcon(image));
         add(menu);
         menu.setLayout(new BorderLayout());
         setVisible(true);
@@ -63,7 +47,7 @@ public class ArabicMenu extends JPanel{
             gbc.ipady = 80;
             gbc.ipadx = 300;
             
-            JButton button = new BlankButtons();
+            JButton button = new BlankButtons("");
             gbc.insets = new Insets(400,0,130,0);
             gbc.gridy = 1;
             westPanel.add(button, gbc);
@@ -75,12 +59,12 @@ public class ArabicMenu extends JPanel{
             }
         });
 
-            JButton button2 = new BlankButtons();
+            JButton button2 = new BlankButtons("");
             gbc.insets = new Insets(0,0,110,0);
             gbc.gridy = 2;
             westPanel.add(button2, gbc);
 
-            JButton button3 = new BlankButtons();
+            JButton button3 = new BlankButtons("");
             gbc.ipadx = 200;
             gbc.gridy = 3;
             westPanel.add(button3, gbc);
@@ -92,7 +76,7 @@ public class ArabicMenu extends JPanel{
             }
         });
 
-            JButton button4 = new BlankButtons();
+            JButton button4 = new BlankButtons("");
             gbc.insets = new Insets(0,0,200,0);
             gbc.ipadx = 100;
             gbc.gridy = 4;
@@ -101,7 +85,6 @@ public class ArabicMenu extends JPanel{
 
             menu.add(westPanel , BorderLayout.WEST);
             // Add the components to the main panel
-            arabicCreated = true;
         }
 
         public int getWhichOne() {
