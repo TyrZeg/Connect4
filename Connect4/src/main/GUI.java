@@ -12,7 +12,6 @@ class GUI extends JFrame {
     GUI() {
         super("Connect 4");
         //Settings settings = new Settings(false);
-        setLayout(new BorderLayout());
         ArabicMenu arabicMenu = new ArabicMenu();
         Game gameMenu = new Game();
         EnglishMenu menu = new EnglishMenu();

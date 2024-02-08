@@ -13,7 +13,7 @@ public class Settings extends JPanel{
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.35f));
         //setPreferredSize(new Dimension(400,400));
         setVisible(true);
-        JButton button = new BlankButtons("Hello");
+        JButton button = new MenuButtons("Hello", Color.WHITE, Color.YELLOW);
         add(button);
 
 

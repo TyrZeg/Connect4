@@ -10,32 +10,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ArabicMenu extends JPanel{
+
     int whichOne;
-    ArabicMenu(){
-    //ImageIcon icon = new ImageIcon(getClass().getResource("JavaArabicUI.jpg"));
-    //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    //Image image = icon.getImage().getScaledInstance(screenSize.width, screenSize.height, Image.SCALE_SMOOTH);
     ImageIcon img = new ImageIcon(getClass().getResource("JavaArabicUI.jpg"));
-    JPanel menu = new JPanel()
+    @Override
+    protected void paintComponent(Graphics g)
     {
-        @Override
-        protected void paintComponent(Graphics g)
-        {
-            super.paintComponent(g);
-            g.drawImage(img.getImage(), 1920, 1080, null);
-        }
-        };
-        add(menu);
-        menu.setLayout(new BorderLayout());
+        super.paintComponent(g);
+        g.drawImage(img.getImage(), 0, 0,null);
+    }
+    ArabicMenu(){
+        setLayout(new BorderLayout());
         setVisible(true);
-            // Background Panel
-
-            
-
-            // Settings Panel
-            // JPanel settingsPanel = new JPanel();
-            //settingsPanel.add(new JLabel("Settings Panel"));
-
 
             // Create a new panel for the west side with an HBox layout
             JPanel westPanel = new JPanel();
@@ -47,7 +33,7 @@ public class ArabicMenu extends JPanel{
             gbc.ipady = 80;
             gbc.ipadx = 300;
             
-            JButton button = new BlankButtons("");
+            JButton button = new MenuButtons("", Color.WHITE, Color.YELLOW);
             gbc.insets = new Insets(400,0,130,0);
             gbc.gridy = 1;
             westPanel.add(button, gbc);
@@ -59,12 +45,12 @@ public class ArabicMenu extends JPanel{
             }
         });
 
-            JButton button2 = new BlankButtons("");
+            JButton button2 = new MenuButtons("", Color.WHITE, Color.YELLOW);
             gbc.insets = new Insets(0,0,110,0);
             gbc.gridy = 2;
             westPanel.add(button2, gbc);
 
-            JButton button3 = new BlankButtons("");
+            JButton button3 = new MenuButtons("", Color.WHITE, Color.YELLOW);
             gbc.ipadx = 200;
             gbc.gridy = 3;
             westPanel.add(button3, gbc);
@@ -76,25 +62,38 @@ public class ArabicMenu extends JPanel{
             }
         });
 
-            JButton button4 = new BlankButtons("");
+            JButton button4 = new MenuButtons("", Color.WHITE, Color.YELLOW);
             gbc.insets = new Insets(0,0,200,0);
             gbc.ipadx = 100;
             gbc.gridy = 4;
             westPanel.add(button4, gbc);
 
 
-            menu.add(westPanel , BorderLayout.WEST);
+            add(westPanel , BorderLayout.WEST);
             // Add the components to the main panel
         }
 
-        public int getWhichOne() {
-            return whichOne;
-          }
+    public int getWhichOne() {
+        return whichOne;
+    }
         
           // Setter
-          public void setWhichOne(int newwhichOne) {
-            this.whichOne = newwhichOne;
-          }
+    public void setWhichOne(int newwhichOne) {
+        this.whichOne = newwhichOne;
+    }
 }
+    
 
 
+
+
+/*تلعب من دون إتصال
+
+
+تلعب مع  إتصال
+
+
+الاعدادات
+
+
+غادر     */
