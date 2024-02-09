@@ -5,48 +5,45 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-    
 class GUI extends JFrame {
     int whichOne;
     int araWhichOne;
+
+    // Game
+    private Game gameMenu = new Game();
+
+    // Menu's
+    private ArabicMenu arabicMenu = new ArabicMenu();
+    private EnglishMenu menu = new EnglishMenu();
+
+    public static Settings settings = new Settings(false);
+
     GUI() {
         super("Connect 4");
-        //Settings settings = new Settings(false);
-        ArabicMenu arabicMenu = new ArabicMenu();
-        Game gameMenu = new Game();
-        EnglishMenu menu = new EnglishMenu();
+        // Settings settings = new Settings(false);
+        setPreferredSize(new Dimension(1920, 1080));
         add(menu);
-        
 
         setVisible(true);
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        do{
+        do {
 
             whichOne = menu.getWhichOne();
             araWhichOne = arabicMenu.getWhichOne();
 
-            if(araWhichOne == 1){
+            if (araWhichOne == 1) {
                 arabicMenu.setWhichOne(0);
                 arabicMenu.setVisible(false);
                 menu.setVisible(true);
-            }else if(whichOne == 2){
+            }
+            if (whichOne == 2) {
                 menu.setWhichOne(0);
+                menu.setVisible(false);
                 add(arabicMenu);
-                menu.setVisible(false);
                 arabicMenu.setVisible(true);
-                //
-                //settings = new Settings(false);
-                //add(settings, BorderLayout.CENTER);
-                //settings.setVisible(true);
-                
-            }else if(whichOne == 3 || araWhichOne == 3){
-                arabicMenu.setWhichOne(0);
-                menu.setWhichOne(0);
-                add(gameMenu);
-                menu.setVisible(false);
-                arabicMenu.setVisible(false);
-                gameMenu.setVisible(true);
+            } else {
+
             }
             try {
                 Thread.sleep(500);
@@ -54,8 +51,14 @@ class GUI extends JFrame {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        }while(!(whichOne == 3 || araWhichOne == 3));
-        
+        } while (!(whichOne == 3 || araWhichOne == 3));
+
+        arabicMenu.setWhichOne(0);
+        menu.setWhichOne(0);
+        add(gameMenu);
+        menu.setVisible(false);
+        arabicMenu.setVisible(false);
+        gameMenu.setVisible(true);
         System.out.println("Hi");
     }
 
