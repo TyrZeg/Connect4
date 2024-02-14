@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class EnglishMenu extends JPanel {
-    int whichOne;
-    boolean settingsOpen = false;
-    ImageIcon img = new ImageIcon(getClass().getResource("JavaMenu.jpg"));
+    private Settings settings = GUI.settings;
+    private boolean settingsOpen = settings.settingsOpen;
+    private ImageIcon img = new ImageIcon(getClass().getResource("JavaMenu.jpg"));
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -18,8 +18,8 @@ public class EnglishMenu extends JPanel {
 
     EnglishMenu() {
         setLayout(new BorderLayout());
-        Settings settings = GUI.settings;
         add(settings);
+
 
         // West Panel
         JPanel westPanel = new JPanel();
@@ -30,7 +30,7 @@ public class EnglishMenu extends JPanel {
         gbc.weightx = 1;
 
         // Buttons
-        JButton button = new MenuButtons("Offline Play", Color.WHITE, Color.YELLOW);
+        JButton button = new MenuButtons("Offline Play", Color.WHITE, Color.YELLOW, 50);
         gbc.insets = new Insets(300, 0, 130, 0);
         gbc.gridy = 1;
         westPanel.add(button, gbc);
@@ -38,28 +38,28 @@ public class EnglishMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
-                setWhichOne(3);
+                settings.setWhichOne(3);
             }
         });
 
-        JButton button2 = new MenuButtons("Online Play", Color.WHITE, Color.YELLOW);
+        JButton button2 = new MenuButtons("Online Play", Color.WHITE, Color.YELLOW, 50);
         gbc.insets = new Insets(0, 0, 130, 0);
         gbc.gridy = 2;
         westPanel.add(button2, gbc);
 
-        JButton button3 = new MenuButtons("Settings", Color.WHITE, Color.YELLOW);
+        JButton button3 = new MenuButtons("Settings", Color.WHITE, Color.YELLOW, 50);
         gbc.gridy = 3;
         westPanel.add(button3, gbc);
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
-                // setWhichOne(2);
-
-                if (settingsOpen == false) {
+                add(settings);
+                repaint();
+                if (!settingsOpen) {
                     settingsOpen = true;
                     settings.setVisible(true);
-                    System.out.println("In Settings");
+                    System.out.println(settingsOpen);
                 } else {
                     settings.setVisible(false);
                     settingsOpen = false;
@@ -68,7 +68,7 @@ public class EnglishMenu extends JPanel {
                 System.out.println("Hello");
             }
         });
-        JButton button4 = new MenuButtons("Quit", Color.WHITE, Color.YELLOW);
+        JButton button4 = new MenuButtons("Quit", Color.WHITE, Color.YELLOW, 50);
         gbc.insets = new Insets(0, 0, 50, 0);
         gbc.gridy = 4;
         westPanel.add(button4, gbc);
@@ -76,12 +76,4 @@ public class EnglishMenu extends JPanel {
         add(westPanel, BorderLayout.WEST);
     }
 
-    public int getWhichOne() {
-        return whichOne;
-    }
-
-    // Setter
-    public void setWhichOne(int newwhichOne) {
-        this.whichOne = newwhichOne;
-    }
 }

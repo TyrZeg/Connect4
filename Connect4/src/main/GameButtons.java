@@ -6,19 +6,18 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class MenuButtons extends JButton implements MouseListener {
-    private Color mouseOverColor;
-    private Color defaultColour;
-
+public class GameButtons extends JButton implements MouseListener {
+    private Icon mouseOverColor;
+    private Icon icon;
     // Obtained from https://stackoverflow.com/questions/4585867/transparent-jbutton
-    public MenuButtons(String text, Color defaultColour, Color mouseOverColor, int fontSize) {
-        super(text);
-        setFont(new Font("Arial", Font.PLAIN, 50));
-        setForeground(defaultColour);
-        this.defaultColour = defaultColour;
+    public GameButtons(Icon icon, Icon mouseOverColor) {
+        super(icon);
         this.mouseOverColor = mouseOverColor;
+        this.icon = icon;
         addMouseListener(this);
         setBorder(null);
         setBorderPainted(false);
@@ -41,14 +40,14 @@ public class MenuButtons extends JButton implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getSource() == this) {
-            this.setForeground(this.mouseOverColor);
+            this.setIcon(this.mouseOverColor);
         }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource() == this) {
-            this.setForeground(this.defaultColour);
+            this.setIcon(this.icon);
         }
     }
 }
