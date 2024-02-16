@@ -18,7 +18,7 @@ public class Game extends JPanel {
     private Settings settings = GUI.settings;
     CustomButton but = new CustomButton();
     // static boolean turn;
-    static int player = 0;
+    static int player = 1;
     private int[][] board = new int[6][7];
 
     protected void paintComponent(Graphics g) {
@@ -157,7 +157,7 @@ public class Game extends JPanel {
         JLabel player2JLabel = new JLabel("Player2", JLabel.CENTER);
         player2JLabel.setFont(new Font("Arial", Font.PLAIN, 24));
         player2JPanel.setPreferredSize(new Dimension(220, 64));
-        player2JPanel.setBackground(Color.pink);
+        player2JPanel.setBackground(new Color(128,0,150));
         player2JPanel.add(player2JLabel, BorderLayout.CENTER);
         northEastPanel.add(player2JPanel, BorderLayout.SOUTH);
 
