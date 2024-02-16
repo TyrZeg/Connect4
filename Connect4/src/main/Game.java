@@ -90,7 +90,7 @@ public class Game extends JPanel {
         }
         add(pn1);
 
-        JPanel northPanel = new JPanel(new BorderLayout());
+        
 
 
         JPanel westPanel = new JPanel(new BorderLayout());
@@ -134,10 +134,14 @@ public class Game extends JPanel {
         mgbc.gridy++;
         optionsPanel.add(gameTimer, mgbc);
 
-        JPanel eastPanel = new JPanel(new GridBagLayout());
+        JPanel eastPanel = new JPanel(new BorderLayout());
         eastPanel.setOpaque(false);
         eastPanel.setPreferredSize(new Dimension(330, 1080));
         add(eastPanel, BorderLayout.EAST);
+
+        JPanel northEastPanel = new JPanel(new BorderLayout());
+
+        JPanel southEastPanel = new JPanel(new BorderLayout());
 
         JPanel player1JPanel = new JPanel();
         JLabel player1JLabel = new JLabel("Player1");
@@ -145,9 +149,7 @@ public class Game extends JPanel {
         player1JPanel.setPreferredSize(new Dimension(220, 64));
         player1JPanel.setBackground(Color.orange);
         player1JPanel.add(player1JLabel, BorderLayout.CENTER);
-        mgbc.gridx = 1;
-        mgbc.gridy = 1;
-        eastPanel.add(player1JPanel, mgbc);
+        northEastPanel.add(player1JPanel, BorderLayout.NORTH);
 
         mgbc.gridy++;
         mgbc.insets = new Insets(0, 0, 200, 0);
@@ -157,44 +159,40 @@ public class Game extends JPanel {
         player2JPanel.setPreferredSize(new Dimension(220, 64));
         player2JPanel.setBackground(Color.pink);
         player2JPanel.add(player2JLabel, BorderLayout.CENTER);
-        eastPanel.add(player2JPanel, mgbc);
+        northEastPanel.add(player2JPanel, BorderLayout.SOUTH);
 
-        mgbc.gridy++;
-        mgbc.insets = new Insets(150, 0, 0, 0);
+        eastPanel.add(northEastPanel, BorderLayout.NORTH);
+
         // chat box
         JPanel pn3 = new JPanel(new BorderLayout());
         JTextField textLine = new JTextField();
         JButton submitTextButton = new JButton("Send");
-        ArrayList<String> textArr = new ArrayList<String>();
+  
 
         textLine.setPreferredSize(new Dimension(300, 50));
 
-        JTextPane chat = new JTextPane();
+
+        JTextArea chat = new JTextArea();
         chat.setEditable(false);
 
+        JScrollPane scrollPane = new JScrollPane(chat);
+        scrollPane.setPreferredSize(new Dimension(300, 500));
+
         submitTextButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == submitTextButton) {
-                    textArr.add(textLine.getText());
-                    textArr.add("\n");
-                    chat.setText(textArr.toString().replace("[", "").replace("]", "").replace(",", ""));
-
-                    String chatHistory = chat.getText();
-
-                    System.out.println(chatHistory);
-                    System.out.println(textArr.toString());
-
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String message = textLine.getText();
+                    chat.append("Player" + getPlayer() + ": " + message + "\n");
+                    textLine.setText(""); // Clear the input field
                 }
-            }
-
-        });
+            });
 
         pn3.add(submitTextButton, BorderLayout.WEST);
         pn3.add(textLine, BorderLayout.SOUTH);
-        pn3.add(chat, BorderLayout.CENTER);
-        eastPanel.add(pn3, mgbc);
+        pn3.add(scrollPane, BorderLayout.CENTER);
+        southEastPanel.add(pn3, BorderLayout.CENTER);
+        eastPanel.add(southEastPanel, BorderLayout.SOUTH);
+
         // makeGameButtons();
         setVisible(true);
 
