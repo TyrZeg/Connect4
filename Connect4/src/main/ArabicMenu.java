@@ -4,7 +4,6 @@ import java.awt.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +11,8 @@ import java.awt.event.ActionListener;
 public class ArabicMenu extends JPanel {
     private Settings settings = GUI.settings;
     private boolean settingsOpen = settings.settingsOpen;
-    
-    private ImageIcon img = new ImageIcon(getClass().getResource("JavaMenu.jpg"));
+
+    private ImageIcon img = new ImageIcon(getClass().getResource("../Pictures/JavaMenu.jpg"));
 
     @Override
     protected void paintComponent(Graphics g) {

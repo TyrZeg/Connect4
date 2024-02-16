@@ -5,8 +5,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -14,6 +12,7 @@ import javax.swing.JRadioButton;
 public class Settings extends JPanel {
   private int whichOne;
   public boolean settingsOpen = false;
+
   Settings(boolean language) {
     setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();

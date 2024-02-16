@@ -9,7 +9,7 @@ import javax.swing.*;
 public class EnglishMenu extends JPanel {
     private Settings settings = GUI.settings;
     private boolean settingsOpen = settings.settingsOpen;
-    private ImageIcon img = new ImageIcon(getClass().getResource("JavaMenu.jpg"));
+    private ImageIcon img = new ImageIcon(getClass().getResource("../Pictures/JavaMenu.jpg"));
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -19,7 +19,6 @@ public class EnglishMenu extends JPanel {
     EnglishMenu() {
         setLayout(new BorderLayout());
         add(settings);
-
 
         // West Panel
         JPanel westPanel = new JPanel();
