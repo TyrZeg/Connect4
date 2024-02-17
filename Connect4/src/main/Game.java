@@ -3,15 +3,11 @@ package main;
 import java.awt.*;
 import javax.swing.*;
 
-import org.w3c.dom.events.MouseEvent;
-
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class Game extends JPanel {
 
     ImageIcon img = new ImageIcon(getClass().getResource("../Pictures/JavaGameBackround.jpg"));
-    private GridBagConstraints gbc = new GridBagConstraints();
     Icon icon = new ImageIcon(getClass().getResource("../Pictures/EmptyConnect.PNG"));
     JPanel gameBoard = new JPanel(new GridBagLayout());
     Icon settingsIcon = new ImageIcon(getClass().getResource("../Pictures/settingsIcon.PNG"));

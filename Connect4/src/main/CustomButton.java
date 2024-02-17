@@ -10,7 +10,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
 public class CustomButton extends JButton implements MouseListener {
-    private Color borderColor;
+    //private Color borderColor;
 
     private int radius = 100; // Set the radius for rounded corners
     final Color transparent = new Color(0, 0, 0, 0.1f); // Alpha value: 128 (50% transparency)
@@ -43,10 +43,11 @@ public class CustomButton extends JButton implements MouseListener {
     }
     // Make sure the button is opaque and the content area is filled
 
+    /* 
     public void setBorderColor(Color borderColor) {
         this.borderColor = borderColor;
     }
-
+*/
     public void setRadius(int radius) {
         this.radius = radius;
     }

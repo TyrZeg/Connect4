@@ -56,7 +56,6 @@ class GUI extends JFrame {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         } while (!(whichOne == 4));
@@ -65,6 +64,7 @@ class GUI extends JFrame {
 
     public static void main(String args[]) {
         System.setProperty("Dsun.java2d.uiScale", "1.0");
+        @SuppressWarnings("unused")
         GUI myScreen = new GUI();
 
     }
