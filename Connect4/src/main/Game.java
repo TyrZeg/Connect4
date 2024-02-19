@@ -1,32 +1,44 @@
 package main;
 
 import java.awt.*;
+
+import javax.print.DocFlavor.URL;
 import javax.swing.*;
 
-import org.w3c.dom.events.MouseEvent;
-
 import java.awt.event.*;
-import java.util.ArrayList;
 
+/**
+ * The Game class represents the main game panel for a Connect Four game.
+ * It extends JPanel and provides a graphical user interface for the game.
+ * The game board, buttons, player information, and chat box are all managed within this class.
+ *
+ * @author Ihab Alobidat / Brayden Johnston
+ */
 public class Game extends JPanel {
 
-    ImageIcon img = new ImageIcon(getClass().getResource("../Pictures/JavaGameBackround.jpg"));
-    private GridBagConstraints gbc = new GridBagConstraints();
-    Icon icon = new ImageIcon(getClass().getResource("../Pictures/EmptyConnect.PNG"));
+    // ImageIcon and Icon for background images
+    ImageIcon img = new ImageIcon(getClass().getResource("/Pictures/JavaGameBackround.jpg"));
     JPanel gameBoard = new JPanel(new GridBagLayout());
-    Icon settingsIcon = new ImageIcon(getClass().getResource("../Pictures/settingsIcon.PNG"));
+    //Icon settingsIcon = new ImageIcon(getClass().getResource("/Pictures/settingsIcon.PNG"));
+    java.net.URL url = getClass().getResource("/Pictures/settingsIcon.jpg");
+    Icon settingsIcon = new ImageIcon(url);
+    
+    
+    
+    // Components for the game board
     private Settings settings = GUI.settings;
     CustomButton but = new CustomButton();
-    // static boolean turn;
-    static int player = 0;
+    static int player = 1;
     private int[][] board = new int[6][7];
 
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), null);
-    }
-
+    
+    /**
+     * Constructs a new Game object.
+     * Initializes the game board, buttons, player information, and chat box.
+     */
     Game() {
+        System.out.println(url);
+
         setLayout(new BorderLayout());
 
         gameBoard.setOpaque(false);
@@ -79,6 +91,7 @@ public class Game extends JPanel {
 
             pn1.add(button);
 
+             // ActionListener for the buttons to switch player turns
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -90,7 +103,7 @@ public class Game extends JPanel {
         }
         add(pn1);
 
-        JPanel northPanel = new JPanel(new BorderLayout());
+        
 
 
         JPanel westPanel = new JPanel(new BorderLayout());
@@ -134,10 +147,14 @@ public class Game extends JPanel {
         mgbc.gridy++;
         optionsPanel.add(gameTimer, mgbc);
 
-        JPanel eastPanel = new JPanel(new GridBagLayout());
+        JPanel eastPanel = new JPanel(new BorderLayout());
         eastPanel.setOpaque(false);
         eastPanel.setPreferredSize(new Dimension(330, 1080));
         add(eastPanel, BorderLayout.EAST);
+
+        JPanel northEastPanel = new JPanel(new BorderLayout());
+
+        JPanel southEastPanel = new JPanel(new BorderLayout());
 
         JPanel player1JPanel = new JPanel();
         JLabel player1JLabel = new JLabel("Player1");
@@ -145,9 +162,7 @@ public class Game extends JPanel {
         player1JPanel.setPreferredSize(new Dimension(220, 64));
         player1JPanel.setBackground(Color.orange);
         player1JPanel.add(player1JLabel, BorderLayout.CENTER);
-        mgbc.gridx = 1;
-        mgbc.gridy = 1;
-        eastPanel.add(player1JPanel, mgbc);
+        northEastPanel.add(player1JPanel, BorderLayout.NORTH);
 
         mgbc.gridy++;
         mgbc.insets = new Insets(0, 0, 200, 0);
@@ -155,57 +170,74 @@ public class Game extends JPanel {
         JLabel player2JLabel = new JLabel("Player2", JLabel.CENTER);
         player2JLabel.setFont(new Font("Arial", Font.PLAIN, 24));
         player2JPanel.setPreferredSize(new Dimension(220, 64));
-        player2JPanel.setBackground(Color.pink);
+        player2JPanel.setBackground(new Color(128,0,150));
         player2JPanel.add(player2JLabel, BorderLayout.CENTER);
-        eastPanel.add(player2JPanel, mgbc);
+        northEastPanel.add(player2JPanel, BorderLayout.SOUTH);
 
-        mgbc.gridy++;
-        mgbc.insets = new Insets(150, 0, 0, 0);
+        eastPanel.add(northEastPanel, BorderLayout.NORTH);
+
         // chat box
         JPanel pn3 = new JPanel(new BorderLayout());
         JTextField textLine = new JTextField();
         JButton submitTextButton = new JButton("Send");
-        ArrayList<String> textArr = new ArrayList<String>();
+  
 
         textLine.setPreferredSize(new Dimension(300, 50));
 
-        JTextPane chat = new JTextPane();
+
+        JTextArea chat = new JTextArea();
         chat.setEditable(false);
 
+        JScrollPane scrollPane = new JScrollPane(chat);
+        scrollPane.setPreferredSize(new Dimension(300, 500));
+
         submitTextButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == submitTextButton) {
-                    textArr.add(textLine.getText());
-                    textArr.add("\n");
-                    chat.setText(textArr.toString().replace("[", "").replace("]", "").replace(",", ""));
-
-                    String chatHistory = chat.getText();
-
-                    System.out.println(chatHistory);
-                    System.out.println(textArr.toString());
-
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String message = textLine.getText();
+                    chat.append("Player" + getPlayer() + ": " + message + "\n");
+                    textLine.setText(""); // Clear the input field
                 }
-            }
-
-        });
+            });
 
         pn3.add(submitTextButton, BorderLayout.WEST);
         pn3.add(textLine, BorderLayout.SOUTH);
-        pn3.add(chat, BorderLayout.CENTER);
-        eastPanel.add(pn3, mgbc);
+        pn3.add(scrollPane, BorderLayout.CENTER);
+        southEastPanel.add(pn3, BorderLayout.CENTER);
+        eastPanel.add(southEastPanel, BorderLayout.SOUTH);
+
         // makeGameButtons();
         setVisible(true);
 
         repaint();
     }
 
+    /**
+     * Customizes the appearance of the JPanel by painting the background image.
+     *
+     * @param g The Graphics object used for painting.
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), null);
+    }
+
+    /**
+     * Sets the current player number.
+     *
+     * @param player The player number to set.
+     */
     public void setPlayer(int player) {
         Game.player = player;
     }
  
 
+    /**
+     * Retrieves the current player number.
+     *
+     * @return The current player number.
+     */
     public static int getPlayer() {
         System.out.println(player);
         return player;
