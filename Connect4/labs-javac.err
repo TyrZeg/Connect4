@@ -1,0 +1,29 @@
+warning: [path] Invalid filename: lib/*
+src\main\GUI.java:9: warning: [serial] serializable class GUI has no definition of serialVersionUID
+class GUI extends JFrame {
+^
+src\main\Game.java:17: warning: [serial] serializable class Game has no definition of serialVersionUID
+public class Game extends JPanel {
+       ^
+src\main\Game.java:24: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    Icon settingsIcon = new ImageIcon(url);
+         ^
+src\main\ArabicMenu.java:14: warning: [serial] serializable class ArabicMenu has no definition of serialVersionUID
+public class ArabicMenu extends JPanel {
+       ^
+src\main\EnglishMenu.java:13: warning: [serial] serializable class EnglishMenu has no definition of serialVersionUID
+public class EnglishMenu extends JPanel {
+       ^
+src\main\Settings.java:14: warning: [serial] serializable class Settings has no definition of serialVersionUID
+public class Settings extends JPanel {
+       ^
+src\main\CustomButton.java:18: warning: [serial] serializable class CustomButton has no definition of serialVersionUID
+public class CustomButton extends JButton implements MouseListener {
+       ^
+src\main\MenuButtons.java:12: warning: [serial] serializable class MenuButtons has no definition of serialVersionUID
+public class MenuButtons extends JButton implements MouseListener {
+       ^
+src\main\MenuButtons.java:27: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setFont(new Font("Arial", Font.PLAIN, 50));
+               ^
+10 warnings
