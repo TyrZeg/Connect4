@@ -92,12 +92,6 @@ public class EnglishMenu extends JPanel {
             }
         });
         JButton button4 = new MenuButtons("Quit", Color.WHITE, Color.YELLOW, 50);
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-               System.exit(ABORT);
-            }
-        });
         gbc.insets = new Insets(0, 0, 50, 0);
         gbc.gridy = 4;
         westPanel.add(button4, gbc);
