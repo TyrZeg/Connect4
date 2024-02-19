@@ -3,7 +3,9 @@ package main;
 import java.awt.Dimension;
 
 import javax.swing.*;
-
+/**
+ * This class represents the GUI for the Connect 4 game.
+ */
 class GUI extends JFrame {
     int whichOne;
 
@@ -15,7 +17,10 @@ class GUI extends JFrame {
     private EnglishMenu menu = new EnglishMenu();
 
     public static Settings settings = new Settings(false);
-
+    /**
+     * Constructor for the GUI class.
+     * Initializes the GUI with a menu and game settings.
+     */
     GUI() {
         super("Connect 4");
         setPreferredSize(new Dimension(1920, 1080));
@@ -28,7 +33,10 @@ class GUI extends JFrame {
         makeMenu();
 
     }
-
+    /**
+     * This method creates the menu for the game.
+     * It checks the settings to determine which menu to display.
+     */
     private void makeMenu() {
         do {
 
@@ -61,11 +69,16 @@ class GUI extends JFrame {
         } while (!(whichOne == 4));
         return;
     }
-
+    /**
+     * The main method for the GUI class.
+     * It sets the system property and creates a new GUI.
+     * @param args command line arguments
+     */
     public static void main(String args[]) {
         System.setProperty("Dsun.java2d.uiScale", "1.0");
         @SuppressWarnings("unused")
         GUI myScreen = new GUI();
+        
 
     }
 }

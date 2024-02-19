@@ -1,28 +1,44 @@
 package main;
 
 import java.awt.*;
+
+import javax.print.DocFlavor.URL;
 import javax.swing.*;
 
 import java.awt.event.*;
 
+/**
+ * The Game class represents the main game panel for a Connect Four game.
+ * It extends JPanel and provides a graphical user interface for the game.
+ * The game board, buttons, player information, and chat box are all managed within this class.
+ *
+ * @author Ihab Alobidat / Brayden Johnston
+ */
 public class Game extends JPanel {
 
-    ImageIcon img = new ImageIcon(getClass().getResource("../Pictures/JavaGameBackround.jpg"));
-    Icon icon = new ImageIcon(getClass().getResource("../Pictures/EmptyConnect.PNG"));
+    // ImageIcon and Icon for background images
+    ImageIcon img = new ImageIcon(getClass().getResource("/Pictures/JavaGameBackround.jpg"));
     JPanel gameBoard = new JPanel(new GridBagLayout());
-    Icon settingsIcon = new ImageIcon(getClass().getResource("../Pictures/settingsIcon.PNG"));
+    //Icon settingsIcon = new ImageIcon(getClass().getResource("/Pictures/settingsIcon.PNG"));
+    java.net.URL url = getClass().getResource("/Pictures/settingsIcon.jpg");
+    Icon settingsIcon = new ImageIcon(url);
+    
+    
+    
+    // Components for the game board
     private Settings settings = GUI.settings;
     CustomButton but = new CustomButton();
-    // static boolean turn;
     static int player = 1;
     private int[][] board = new int[6][7];
 
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), null);
-    }
-
+    
+    /**
+     * Constructs a new Game object.
+     * Initializes the game board, buttons, player information, and chat box.
+     */
     Game() {
+        System.out.println(url);
+
         setLayout(new BorderLayout());
 
         gameBoard.setOpaque(false);
@@ -75,6 +91,7 @@ public class Game extends JPanel {
 
             pn1.add(button);
 
+             // ActionListener for the buttons to switch player turns
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -195,11 +212,32 @@ public class Game extends JPanel {
         repaint();
     }
 
+    /**
+     * Customizes the appearance of the JPanel by painting the background image.
+     *
+     * @param g The Graphics object used for painting.
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), null);
+    }
+
+    /**
+     * Sets the current player number.
+     *
+     * @param player The player number to set.
+     */
     public void setPlayer(int player) {
         Game.player = player;
     }
  
 
+    /**
+     * Retrieves the current player number.
+     *
+     * @return The current player number.
+     */
     public static int getPlayer() {
         System.out.println(player);
         return player;

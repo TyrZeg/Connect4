@@ -7,18 +7,33 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * This class represents an Arabic menu in the GUI.
+ * It extends JPanel and contains settings, a boolean to check if settings are open, and an image for the menu.
+ */
 public class ArabicMenu extends JPanel {
     private Settings settings = GUI.settings;
     private boolean settingsOpen = settings.settingsOpen;
 
-    private ImageIcon img = new ImageIcon(getClass().getResource("../Pictures/JavaMenu.jpg"));
+    private ImageIcon img = new ImageIcon(getClass().getResource("/Pictures/JavaMenu.jpg"));
+    /**
+    * printing the Arabic menu frame and buttons
+    * for the first window pop up
+    */
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), null);
     }
+    /**
+     * Constructs an ArabicMenu object.
+     * This constructor initializes the layout, adds settings, creates a west panel with a grid bag layout,
+     * and adds four buttons with specific actions to the west panel.
+     * The first button allows the user to play without connection, the second button allows the user to play with connection,
+     * the third button opens the settings if they are not open and hides them if they are open,
+     * and the fourth button is for exiting.
+     */
 
     ArabicMenu() {
         setLayout(new BorderLayout());
@@ -41,6 +56,11 @@ public class ArabicMenu extends JPanel {
         gbc.gridy = 1;
         westPanel.add(button, gbc);
         button.addActionListener(new ActionListener() {
+        	 /** This method is used to handle the action performed
+             *  event for the game offline start button.
+             * @param evt ActionEvent object.
+             */
+
             @Override
             public void actionPerformed(ActionEvent evt) {
 
@@ -57,7 +77,11 @@ public class ArabicMenu extends JPanel {
         gbc.gridy = 3;
         westPanel.add(button3, gbc);
         button3.addActionListener(new ActionListener() {
-
+        	/**
+             * This method is used to handle the action performed
+             *  event for the changing language using the settings panel.
+             * @param evt ActionEvent object.
+             */
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (!settingsOpen) {
