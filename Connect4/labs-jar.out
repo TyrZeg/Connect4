@@ -1,6 +1,4 @@
 added manifest
-adding: .gitignore(in = 84) (out= 67)(deflated 20%)
-adding: GUI.class(in = 865) (out= 548)(deflated 36%)
 adding: main/(in = 0) (out= 0)(stored 0%)
 adding: main/ArabicMenu$1.class(in = 638) (out= 425)(deflated 33%)
 adding: main/ArabicMenu$2.class(in = 921) (out= 589)(deflated 36%)

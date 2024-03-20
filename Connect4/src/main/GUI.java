@@ -60,6 +60,8 @@ class GUI extends JFrame {
                 menu.setVisible(false);
                 arabicMenu.setVisible(false);
                 gameMenu.setVisible(true);
+            }else if (whichOne == 4) {
+                setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             }
             try {
                 Thread.sleep(500);
