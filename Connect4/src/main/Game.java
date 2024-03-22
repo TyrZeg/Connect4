@@ -1,57 +1,39 @@
+
 package main;
-
-import java.awt.*;
-
-import javax.print.DocFlavor.URL;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import java.awt.event.*;
-
-/**
- * The Game class represents the main game panel for a Connect Four game.
- * It extends JPanel and provides a graphical user interface for the game.
- * The game board, buttons, player information, and chat box are all managed within this class.
- *
- * @author Ihab Alobidat / Brayden Johnston
- */
 public class Game extends JPanel {
 
     // ImageIcon and Icon for background images
     ImageIcon img = new ImageIcon(getClass().getResource("/Pictures/JavaGameBackround.jpg"));
-    JPanel gameBoard = new JPanel(new GridBagLayout());
-    //Icon settingsIcon = new ImageIcon(getClass().getResource("/Pictures/settingsIcon.PNG"));
+    //JPanel gameBoard = new JPanel(new GridBagLayout());
+
     java.net.URL url = getClass().getResource("/Pictures/settingsIcon.jpg");
     Icon settingsIcon = new ImageIcon(url);
-    
-    
-    
+
     // Components for the game board
     private Settings settings = GUI.settings;
-    CustomButton but = new CustomButton();
     static int player = 1;
-    private int[][] board = new int[6][7];
-
+    public static CustomButton[][] boardOBJ = new CustomButton[6][7];
     
+    private static int[][] board= new int[6][7];
+
     /**
      * Constructs a new Game object.
      * Initializes the game board, buttons, player information, and chat box.
      */
     Game() {
+    	
+    
+    	
         System.out.println(url);
 
         setLayout(new BorderLayout());
 
-        gameBoard.setOpaque(false);
-        add(gameBoard, BorderLayout.CENTER);
-
-        CustomButton[] btn = new CustomButton[42];
-
-        // Initialize the game board to be empty.
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                board[i][j] = 0;
-            }
-        }
+       // gameBoard.setOpaque(false);
 
         JPanel pn1 = new JPanel(new GridLayout(6, 7)) {
             @Override
@@ -64,47 +46,109 @@ public class Game extends JPanel {
                 // Calculate the size of each cell.
                 int cellWidth = getWidth() / 7;
                 int cellHeight = getHeight() / 6;
-                Color transparent = new Color(140, 200, 0, 210); // Alpha value: 128 (50% transparency)
+                //for the circular rings color
+                Color transparent = new Color(200, 200, 200, 250); // Alpha value: 128 (50% transparency)
 
                 // Draw the game board.
                 for (int i = 0; i < 6; i++) {
                     for (int j = 0; j < 7; j++) {
-                        if (board[i][j] == 0) {
-                            g2d.setColor(transparent);
-                        } else if (board[i][j] == 1) {
-                            g2d.setColor(Color.RED);
-                        } else {
-                            g2d.setColor(Color.YELLOW);
-                        }
+                        g2d.setColor(transparent);
                         g2d.drawOval(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
-
                     }
                 }
             }
         };
 
-        for (CustomButton button : btn) {
-            button = new CustomButton();
-
-            button.setOpaque(false);
-            button.setContentAreaFilled(false);
-
-            pn1.add(button);
-
-             // ActionListener for the buttons to switch player turns
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setPlayer(getPlayer() == 1 ? 2 : 1);
-
-                }
-            });
-
-        }
-        add(pn1);
-
         
+        /*
+      Columns: 0 1 2 3 4 5 6
+Rows
+0       [ ][ ][ ][ ][ ][ ][ ]
+1       [ ][ ][ ][ ][ ][ ][ ]
+2       [ ][ ][ ][ ][ ][ ][ ]
+3       [ ][ ][ ][ ][ ][ ][ ]
+4       [ ][ ][ ][ ][ ][ ][ ]
+5       [ ][ ][ ][ ][ ][ ][ ]
+         */
+        // Create the buttons.
+        for (int i = 0; i < 6;i++) {
+            for (int j = 0; j < 7; j++) {
+            	
+            	
+            	/*while(j<5 &&board[j][i]==0) {
+            		System.out.println("Inside j loop, J =" + j + " i= "+ i);
+            		j++;
+            	}
+            	if(j!=5) {
+                	j--;
+            	}*/
+            	System.out.println("value of j: :: i"+ j + i);
+                final CustomButton finalButton = new CustomButton(j,i);//btn[][] to store custome buttons, then use the board{}{} to get object
+                														//button, then call the actionlistener of that button ?
 
+                finalButton.setOpaque(false);
+                finalButton.setContentAreaFilled(false);
+                pn1.add(finalButton);
+              
+              //  j = boardOBJ[j][i].chipPosition(i,getPlayer());
+
+                boardOBJ[i][j] = finalButton;
+  boardOBJ[i][j].setCol(j);
+                boardOBJ[i][j].setRow(i);
+                //board[j][i] =1;
+                // ActionListener for the buttons to switch player turns
+                //chipPlacement(j,i);
+               /// final int jj = j;
+                //final int ii = i;
+             // Inside your loop for creating buttons
+                boardOBJ[i][j].addActionListener(e -> {
+                    CustomButton clickedButton = (CustomButton) e.getSource();
+                    int column = clickedButton.getCol();
+                    int emptyRow = clickedButton.chipPosition(column,player); // Implement this method to find the lowest empty row
+                    if (emptyRow != -1) {
+                    	System.out.println("testing for current emptyrow and col" + emptyRow +"   ::  "+ column);
+                        CustomButton buttonToChange = boardOBJ[emptyRow][column];
+                        
+                        buttonToChange.color = Game.getPlayer() == 1 ? CustomButton.orange : CustomButton.purple;
+                        //buttonToChange.setColorForPlayer(getPlayer()); // Implement this method to set the color based on the player
+                        buttonToChange.repaint(); // Repaint the button to show the new color
+                        board[emptyRow][column] = getPlayer(); // Update the board array
+                        setPlayer(getPlayer() == 1 ? 2 : 1); // Switch players
+                        // Additional logic to check for a win...
+                        CustomButton.checkForWin(emptyRow, column);
+                    }
+                });
+            
+        }
+    }
+       
+//                boardOBJ[jj][i].addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        setPlayer(getPlayer() == 1 ? 2 : 1);
+//                        /*System.out.println(finalButton.getAlignmentX());
+//                        finalButton.setEnabled(false);
+//                        boardOBJ[jj][ii].setRow(jj);
+//                        boardOBJ[jj][ii].setCol(ii);
+//                        int newRow =  boardOBJ[jj][ii].chipPosition(ii,player);
+//                        
+//                        CustomButton btn = new CustomButton(newRow,ii);
+//                        btn.color = new Color(255, 200, 150, 255);
+//                        System.out.println("NEW COLORRRRRRRRRRRRRRRRRRR:"+btn.getColor()); 
+//
+//                        btn.setOpaque(false);
+//                        btn.setContentAreaFilled(false);
+//                        pn1.add(btn);*/
+//                        //System.out.println("LOCATION OF BUTTON X" + finalButton.getX());
+//                        //System.out.println("LOCATION OF BUTTON Y" + finalButton.getY());
+//                    }
+            
+
+        // Add the pn1 panel to the gameBoard panel
+        //gameBoard.add(pn1);
+        add(pn1);
+        // Add the gameBoard panel to the CENTER region of the main panel
+        //add(gameBoard, BorderLayout.CENTER);
 
         JPanel westPanel = new JPanel(new BorderLayout());
         westPanel.setOpaque(false);
@@ -122,7 +166,7 @@ public class Game extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
-                settings.setWhichOne(1);
+                settings.setWhichOne(true);//check this later
             }
         });
 
@@ -239,10 +283,12 @@ public class Game extends JPanel {
      * @return The current player number.
      */
     public static int getPlayer() {
-        System.out.println(player);
+        System.out.println("current player from method getPlayer: "+player);
         return player;
     }
 
+
+}
     /*
      * public static boolean getTurn() {
      * return turn;
@@ -272,4 +318,3 @@ public class Game extends JPanel {
      * }
      * }
      */
-}
